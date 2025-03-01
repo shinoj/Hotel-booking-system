@@ -7,6 +7,7 @@ export interface Hotel {
   rating: number
   image: string | null
   featured: boolean
+  created_at?: Date
 }
 
 export interface User {
@@ -14,6 +15,7 @@ export interface User {
   name: string
   email: string
   password: string
+  role?: "user" | "admin"
   created_at?: Date
 }
 
@@ -29,6 +31,8 @@ export interface Booking {
   created_at?: Date
   hotel_name?: string
   hotel_image?: string
+  user_name?: string
+  user_email?: string
 }
 
 export interface Session {
@@ -36,6 +40,7 @@ export interface Session {
     id: number
     name: string
     email: string
+    role?: "user" | "admin"
   }
 }
 

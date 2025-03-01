@@ -1,11 +1,13 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getHotelById } from "@/lib/db"
-import { Button } from "@/components/ui/button"
+import { getSession } from "@/lib/auth"
 import { MapPin, Star, Wifi, Utensils, Car, Tv } from "lucide-react"
+import { BookingForm } from "@/components/booking-form"
 
 export default async function HotelDetailPage({ params }: { params: { id: string } }) {
   const hotel = await getHotelById(Number.parseInt(params.id))
+  const session = getSession()
 
   if (!hotel) {
     notFound()
@@ -64,29 +66,7 @@ export default async function HotelDetailPage({ params }: { params: { id: string
 
         <div className="lg:col-span-1">
           <div className="border rounded-lg p-6 sticky top-6">
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold mb-1">Price</h2>
-              <div className="flex items-end gap-1">
-                <span className="text-2xl font-bold">${hotel.price}</span>
-                <span className="text-muted-foreground">per night</span>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <Button className="w-full">Book Now</Button>
-              <Button variant="outline" className="w-full">
-                Contact Hotel
-              </Button>
-            </div>
-
-            <div className="mt-4 pt-4 border-t">
-              <h3 className="font-medium mb-2">Hotel Policies</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>Check-in: 3:00 PM - 12:00 AM</li>
-                <li>Check-out: 11:00 AM</li>
-                <li>Cancellation: 24 hours before arrival</li>
-              </ul>
-            </div>
+            <BookingForm hotel={hotel} isLoggedIn={!!session} />
           </div>
         </div>
       </div>

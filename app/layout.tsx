@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "HotelBooker - Find Your Perfect Stay",
   description: "Book your next hotel stay with ease",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -30,3 +31,6 @@ export default function RootLayout({
   )
 }
 
+
+
+import './globals.css'
